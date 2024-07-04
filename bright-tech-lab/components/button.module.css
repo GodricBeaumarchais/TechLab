@@ -1,0 +1,16 @@
+.container {
+    background: var(--gradient);
+    padding: 20px;
+    border-radius: 50px;
+    border: white 2px solid;
+    font-family:  "Inconsolata";
+    font-weight: 600;
+    box-shadow: none;
+    display: flex;
+}
+
+.container:hover {
+    cursor: pointer;
+    opacity: 0.8;
+    border: var(--main-purple   ) 2px solid;
+}

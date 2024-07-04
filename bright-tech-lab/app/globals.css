@@ -1,0 +1,33 @@
+
+@font-face {
+  font-family: "AllertaStencil";   /*Can be any text*/
+  src: url("../font/AllertaStencil-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Inconsolata";
+  src: url("../font/Inconsolata-VariableFont_wdth\,wght.ttf") format("truetype");
+}
+
+:root {
+  --main-purple: #DA107B;
+  --purple-light: #AE0D62;
+  --purple-med-light: #830A4A;
+  --purple-med-dark: #570631;
+  --purple-dark: #16020C;
+
+  --main-blue: #01ECF3;
+  --blue-light: #00BCC1;
+  --blue-med-light: #008C8F;
+  --blue-med-dark: #005C5D;
+  --blue-dark: #001412;
+  --gradient : linear-gradient(150deg, var(--main-purple), var(--main-blue));
+  --gradient-reverse : linear-gradient(150deg, var(--main-blue), var(--main-purple));
+}
+
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
