@@ -3,8 +3,13 @@ import styles from "./page.module.css";
 import logo from "../asset/logo.svg";
 import Image from "next/image";
 import Button from "../components/button";
+import { useRouter } from "next/navigation";
+
+
 
 export default function Home() {
+  const router = useRouter();
+  
   return (
     <main className={styles.main}>
       <div className={styles.titleDiv}>
@@ -21,7 +26,7 @@ export default function Home() {
           />
           <Button
             text={"Simulation de prix"}
-            onClick={() => console.log("Contact")}
+            onClick={() => router.push("/simulation") }
             className={styles.button}/>
         </div>
       </div>

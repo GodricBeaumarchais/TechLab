@@ -9,6 +9,7 @@
   color: white;
   z-index: -30;
   overflow: hidden;
+  border: seagreen 1px solid;
 }
 
 .main h1 {
@@ -21,11 +22,17 @@
 }
 
 .titleDiv {
+  align-self: start;
+  justify-self: flex-start;
+  margin: auto;
   position: relative;
   width: 100%;
   text-align: center;
   background-color: var(--gradient);
   z-index: 0;
+  scale: 0.15;
+  animation: titleAnimation 10s ease-in-out;
+  border: red 1px solid;
 }
 
 .titleDiv::before {
@@ -51,8 +58,9 @@
   left: 45%;
   font-family: "Inconsolata";
   font-weight: 600;
+  color: transparent;
   
-  text-shadow: 0px 2px 3px rgba(0, 0, 0, 1);
+  animation: subtitleAnimation 10s ease-in;
 }
 
 .mainLogo{
@@ -78,4 +86,25 @@
 
 .button{
   font-size: 2vw;
+}
+
+@keyframes titleAnimation {
+  0% {
+    transform: scale(10);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes subtitleAnimation {
+  0% {
+    color: white;
+    text-shadow: 0px 2px 3px rgba(0, 0, 0, 1);
+  }
+  100% {
+    color: transparent;
+    text-shadow: 0px 2px 3px transparent;
+  }
+  
 }

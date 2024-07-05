@@ -2,6 +2,7 @@
 import styles from "./page.module.css";
 import Image from "next/image";
 import Button from "../../components/button";
+import logo from "../../asset/logo.svg";
 
 export default function Simulation() {
     return (
