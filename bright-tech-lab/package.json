@@ -9,8 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "bright-tech-lab": "file:",
     "classnames": "^2.5.1",
-    "next": "14.2.4",
+    "next": "^14.2.13",
     "react": "^18",
     "react-dom": "^18"
   },

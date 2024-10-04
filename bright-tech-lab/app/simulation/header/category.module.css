@@ -1,0 +1,55 @@
+.categoryContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 160px;
+    height: 34px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.categoryText {
+    font-family: 'Inconsolata', monospace;
+    font-weight: 700;
+    font-size: 20px;
+    color: #ffffff;
+    z-index: 2;
+}
+
+.ellipse {
+    position: absolute;
+    width: 160px;
+    height: 18px;
+    background: #000000;
+    filter: blur(5px);
+    z-index: 1;
+    font-weight: 100;
+}
+
+.blur {
+    position: absolute;
+    height: 20%;
+    width: 80%;
+    background: radial-gradient(circle at 50% 50%, var(--main-purple) 0%, #740941 100%);
+    top: 90%;
+    border-radius: 50%;
+    filter: blur(5px); 
+    z-index: 0;
+    opacity: 0; /* Masquer l'ellipse floue par défaut */
+    transition: opacity 0.2s ease; /* Ajouter une transition pour un effet en douceur */
+}
+
+.categoryContainer:hover {
+    transform: scale(1.05);
+}
+
+.selected {
+    transform: scale(1.1);
+}
+
+.selected .blur {
+    opacity: 1; /* Afficher l'ellipse floue uniquement pour la catégorie sélectionnée */
+    background: radial-gradient(circle at 50% 50%, var(--main-purple) 0%, #9c0b58 100%);
+}

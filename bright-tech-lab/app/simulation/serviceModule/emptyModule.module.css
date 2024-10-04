@@ -1,0 +1,36 @@
+.borderbox {
+    background: var(--gradient-reverse);
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    padding: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+.fillbox {
+    background-color: #3C4847;
+    width: 100%;
+    height: 100%;
+    border-radius: 7px;
+    padding: 17px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+.fillbox:hover {
+    background-color: #6e9995;
+    cursor: pointer;
+}
+
+
+.image {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+}
+

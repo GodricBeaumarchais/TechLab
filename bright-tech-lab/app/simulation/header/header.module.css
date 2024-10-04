@@ -1,0 +1,64 @@
+.titleDiv {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 100vw;
+    max-height: 100vh;
+    padding: 20 20px;
+    width: 100%;
+    height: 118px;
+    right: 0;
+    top: 0;
+    color: white;
+    animation: headerAnimation 2s forwards;
+}
+
+.logo {
+    height: 100%;
+    width: auto;
+    margin: 50;
+}
+
+.categoriesContainer {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 20px;
+    align-self: flex-start;
+    opacity: 0; /* Commencez avec une opacité de 0 */
+    transition: opacity 0.5s ease-in; /* Ajoutez une transition pour l'opacité */
+}
+
+.categoriesVisible {
+    align-self: center;
+    opacity: 1;
+}
+
+.logoPointer {
+    
+    cursor: pointer;
+}
+
+@keyframes headerAnimation {
+    0% {
+        height: 100vh;
+        transform: translateX(5%);
+        
+    }
+    20% {
+        height: 100vh;
+        transform: translateX(5%);
+        
+    }
+    100% {
+        height: 80px;
+        transform: translateX(0);
+    }
+}
+
+/* New class to set cursor to pointer */
+.pointerCursor {
+    cursor: pointer;
+}
+

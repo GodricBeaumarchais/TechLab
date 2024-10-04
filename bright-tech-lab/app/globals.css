@@ -1,13 +1,13 @@
-
 @font-face {
-  font-family: "AllertaStencil";   /*Can be any text*/
+  font-family: "AllertaStencil";
+  /*Can be any text*/
   src: url("../font/AllertaStencil-Regular.ttf") format("truetype");
 }
 
-@font-face {
+/* @font-face {
   font-family: "Inconsolata";
   src: url("../font/Inconsolata-VariableFont_wdth\,wght.ttf") format("truetype");
-}
+} */
 
 :root {
   --main-purple: #DA107B;
@@ -21,13 +21,19 @@
   --blue-med-light: #008C8F;
   --blue-med-dark: #005C5D;
   --blue-dark: #001412;
-  --gradient : linear-gradient(150deg, var(--main-purple), var(--main-blue));
-  --gradient-reverse : linear-gradient(150deg, var(--main-blue), var(--main-purple));
+  --gradient: linear-gradient(150deg, var(--main-purple), var(--main-blue));
+  --gradient-reverse: linear-gradient(150deg, var(--main-blue), var(--main-purple));
 }
 
 
-html, body {
+html,
+body {
   height: 100%;
   margin: 0;
   padding: 0;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
 }

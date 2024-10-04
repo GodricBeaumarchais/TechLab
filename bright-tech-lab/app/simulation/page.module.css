@@ -6,7 +6,54 @@
   min-height: 100vh;
   background-color: var(--blue-dark);
   color: white;
-  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  padding: 20px;
+  overflow-y: auto;
 }
 
+.main h1 {
+  font-family: "Inconsolata", monospace;
+  text-align: center;
+  font-weight: 700;
+}
 
+.main h4 {
+  font-family: "Inconsolata", monospace;
+  text-align: center;
+  font-weight: 300;
+  font-size: 10px;
+}
+
+.contentWrapper {
+  width: 100%;
+  position: relative;
+}
+
+.contentSlider {
+  display: flex;
+  transition: transform 0.5s ease;
+  width: 175%;
+  /* 100% pour chaque catégorie */
+}
+
+.contentItem {
+  flex: 0 0 25%;
+  padding: 20px;
+  box-sizing: border-box;
+  opacity: 0.5;
+  transform: scale(0.8);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  height: 100%
+}
+
+.contentItem.active {
+  opacity: 1;
+  transform: scale(1);
+  cursor: default;
+}

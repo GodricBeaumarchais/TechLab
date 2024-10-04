@@ -3,8 +3,8 @@
     padding: 20px;
     border-radius: 50px;
     border: white 2px solid;
-    font-family:  "Inconsolata";
-    font-weight: 600;
+    font-family:  "Inconsolata", monospace;
+    font-weight: 500;
     box-shadow: none;
     display: flex;
 }

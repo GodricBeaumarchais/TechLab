@@ -1,0 +1,99 @@
+.borderbox {
+    background: var(--gradient-reverse);
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    padding: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+.fillbox {
+    background-color: var(--purple-dark);
+    width: 100%;
+    height: 100%;
+    border-radius: 7px;
+    padding: 17px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    flex-direction: column;
+}
+
+.header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.header h1 {
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+.downArrow {
+    width: 30px;
+    height: 30px;
+    margin-left: 10px;
+}
+
+.moins {
+    width: 30px;
+    height: 30px;
+    transform: rotate(180deg);
+    cursor: pointer;
+}
+
+.headerContent {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.separator {
+    width: 85%;
+    height: 3px;
+    border-radius: 10px;
+    background: var(--gradient-reverse);
+    margin: 20px 0;
+}
+
+.dropdown {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.dropdownItem {
+    border: 1px solid var(--purple-light);
+    padding: 10px;
+    cursor: pointer;
+}
+
+.dropdownItem:hover {
+    background-color: var(--purple-light);
+}
+
+.content, .seccontent {
+    width: 80%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.seccontent {
+    width: 70%;
+}
+
+.price {
+    align-self: flex-end;
+    font-size: 22px;
+    font-family: "Inconsolata", monospace;
+}

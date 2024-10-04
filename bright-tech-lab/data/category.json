@@ -1,0 +1,18 @@
+[
+    {
+        "id": "webservice",
+        "text": "WebService"
+    },
+    {
+        "id": "webapp",
+        "text": "WebApp"
+    },
+    {
+        "id": "mobile",
+        "text": "Mobile"
+    },
+    {
+        "id": "desktop",
+        "text": "Desktop"
+    }
+]

@@ -3,13 +3,14 @@ import styles from "./page.module.css";
 import logo from "../asset/logo.svg";
 import Image from "next/image";
 import Button from "../components/button";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
+import Link from "next/link";
 
 
 
 export default function Home() {
   const router = useRouter();
-  
+
   return (
     <main className={styles.main}>
       <div className={styles.titleDiv}>
@@ -18,16 +19,21 @@ export default function Home() {
           <h2>Développement et déploiment</h2>
         </div>
         <Image priority src={logo} alt={"logo"} className={styles.mainLogo} />
-        <div className={styles.bouttonContainer}>
-          <Button
-            text={"Portfolio"}
-            onClick={() => console.log("Découvrir")}
-            className={styles.button}
-          />
+        <div className={styles.bouttonContainer}>+
+          <Link href="https://cv.maximetechlab.fr/" className={styles.noUderline}>
+            <Button
+              text={"Portfolio"}
+              onClick={() => {
+
+              }}
+              className={styles.button}
+            />
+          </Link>
           <Button
             text={"Simulation de prix"}
-            onClick={() => router.push("/simulation") }
-            className={styles.button}/>
+            onClick={() => router.push("/simulation")}
+            className={styles.button} />
+
         </div>
       </div>
     </main>
