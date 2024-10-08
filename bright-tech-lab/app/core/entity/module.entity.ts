@@ -1,8 +1,8 @@
 export enum TypeModule {
     WEBSERVICE = "Webservice",
+    DATABASE = "Database",
     SCRIPT = "Script",
     SERVICE = "Service",
-    DATABASE = "Database"
 }
 
 export enum WebServiceTypeModule {

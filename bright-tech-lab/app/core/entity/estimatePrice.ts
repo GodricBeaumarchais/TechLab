@@ -16,9 +16,9 @@ import {
 
 const basePrices = {
     webService: {
-        frontend: 1500,
-        backend: 2000,
-        hosting: 500
+        frontend: 1000,
+        backend: 1500,
+        hosting: 0
     },
     script: {
         basic: 800,
@@ -33,7 +33,7 @@ const basePrices = {
     service: {
         maintenance: 500,
         deployment: 1000,
-        hosting: 700
+        hosting: 0
     }
 };
 
@@ -134,4 +134,23 @@ function estimateDatabasePrice(module: DatabaseModule): number {
     if (module.Deploy) price += 800;
     if (module.hosting) price += basePrices.service.hosting;
     return price;
+
+
+}
+
+export function calculerPrixTotal(modules: Module[]): number {
+    return modules.reduce((total, module) => {
+        switch (module.moduleType) {
+            case TypeModule.WEBSERVICE:
+                return total + estimateWebServicePrice(module as WebServiceEntity);
+            case TypeModule.SCRIPT:
+                return total + estimateScriptPrice(module as ScriptModule);
+            case TypeModule.SERVICE:
+                return total + estimateServicePrice(module as ServiceModule);
+            case TypeModule.DATABASE:
+                return total + estimateDatabasePrice(module as DatabaseModule);
+            default:
+                return total;
+        }
+    }, 0);
 }

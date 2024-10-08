@@ -4,10 +4,15 @@ import completeLogo from '../../../asset/Complete-Logo.svg';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import Category from './category';
+import { FaDownload } from 'react-icons/fa';
 //import categories from '../../../data/category.json';
 import { TypeModule } from '../../core/entity/module.entity';
+import { FaMailBulk } from "react-icons/fa";
+import copy from 'copy-to-clipboard';
+import Title from '../../../components/title';
 
-export default function Header({ onCategorySelect, categorySelected }: { onCategorySelect: (categoryId: string) => void, categorySelected: string }) {
+
+export default function Header({ onCategorySelect, categorySelected, downloadProjectAsJson, calculatePrice }: { onCategorySelect: (categoryId: string) => void, categorySelected: string, downloadProjectAsJson: () => void, calculatePrice: () => number }) {
     const router = useRouter();
     const [isAnimationFinished, setIsAnimationFinished] = useState<boolean>(false);
     const [areCategoriesVisible, setAreCategoriesVisible] = useState<boolean>(false);
@@ -16,7 +21,7 @@ export default function Header({ onCategorySelect, categorySelected }: { onCateg
         id: type.toLowerCase(),
         text: type
     }));
-    
+
     useEffect(() => {
         const handleAnimationEnd = () => {
             setIsAnimationFinished(true);
@@ -38,14 +43,22 @@ export default function Header({ onCategorySelect, categorySelected }: { onCateg
         };
     }, []);
 
-    
+
+    const handleMailClick = () => {
+        copy("maxime.tancrede.pro@gmail.com"); // Remplacez par votre adresse email réelle
+        alert("Email copié !");
+    };
+
+
 
     const handleCategoryClick = (categoryId: string) => {
         onCategorySelect(categoryId);
     };
 
     return (
+        
         <div className={styles.titleDiv}>
+            
             <Image
                 priority
                 src={completeLogo}
@@ -53,6 +66,8 @@ export default function Header({ onCategorySelect, categorySelected }: { onCateg
                 className={`${styles.logo} ${isAnimationFinished ? styles.logoPointer : ''}`}
                 onClick={() => router.push("/")}
             />
+
+            
             <div className={`${styles.categoriesContainer} ${areCategoriesVisible ? styles.categoriesVisible : ''}`}>
                 {categories.map((category) => (
                     <Category
@@ -63,6 +78,20 @@ export default function Header({ onCategorySelect, categorySelected }: { onCateg
                     />
                 ))}
             </div>
+            <div className={styles.rightPart}>
+                <div className={styles.iconContainer} onClick={downloadProjectAsJson}>
+                    <FaDownload style={{ fill: "url(#blue-gradient)" }} />
+                </div>
+                <div className={styles.iconContainer}  onClick={handleMailClick}>
+                    <FaMailBulk style={{ fill: "url(#blue-gradient)" }} />
+                </div>
+                <div className={styles.PriceDiv} >
+                    <p>Prix {calculatePrice()} €</p>
+                </div>
+
+
+            </div>
+            
         </div>
     );
 }

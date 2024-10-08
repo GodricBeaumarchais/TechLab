@@ -1,0 +1,61 @@
+.container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width:0px;
+    height: 100%;
+    z-index: 100;
+}
+
+.burgerMenu {
+}
+.burgerMenuContainer {
+    border: none;
+    background-color: transparent;
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    border: 1px solid white;
+}
+
+.burgerMenuContainer:hover {
+    cursor: pointer;
+}
+
+.menuContainer {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    right: 0;
+    background-color: var(--blue-med-dark);
+} 
+
+.menuButton {
+    border: none;
+    background-color: transparent;
+    font-size: 2rem;
+    font-family: "Inconsolata", monospace;
+    color: white;
+    padding: 20px;
+    padding-bottom: 5px;
+    padding-top: 7px;
+    cursor: pointer;
+    text-align: left;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+}
+
+.closeButton {
+    display: flex;
+    border: none;
+    background-color: transparent;
+    justify-content: flex-end;
+    
+}
+
+.closeButtonIcon {
+    color: white;
+    font-size: 2rem;
+}

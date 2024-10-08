@@ -7,6 +7,7 @@ import { DatabaseModule, Module, ScriptModule, ServiceModule, TypeModule, WebSer
 import ScriptService from './category/scriptService';
 import Service from './category/service';
 import DatabaseService from './category/databaseService';
+import { calculerPrixTotal } from '../core/entity/estimatePrice';
 const categories = Object.values(TypeModule).map(type => (
     type.toLowerCase()
 ));
@@ -59,10 +60,16 @@ export default function Simulation() {
         }
     }, []);
 
+    const calculatePrice = () => {
+        return calculerPrixTotal(modules);
+    }
+
     const deleteModule = (moduleId: string) => {
         const updatedModules = modules.filter(module => module.id !== moduleId);
-        setModules(updatedModules as Module[]);
-        localStorage.setItem('simulationModules', JSON.stringify(updatedModules));
+        if (updatedModules[0].moduleType.toUpperCase() == selectedCategory.toUpperCase()) {
+            setModules(updatedModules as Module[]);
+            localStorage.setItem('simulationModules', JSON.stringify(updatedModules));
+        }
     };
 
     const handleCategorySelect = (categoryId: string) => {
@@ -105,6 +112,19 @@ export default function Simulation() {
         }
     };
 
+    const downloadProjectAsJson = () => {
+        const projectData = JSON.stringify(modules, null, 2);
+        const blob = new Blob([projectData], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'project.json';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    };
+    
     const createModuleInDifferentService = (type: TypeModule, targetService: string) => {
         const newModule = {
             id: `${type}_${Date.now()}`,
@@ -122,10 +142,11 @@ export default function Simulation() {
     const updateModule = (updatedModule: Module) => {
         const updatedModules = modules.map(module =>
             module.id === updatedModule.id ? updatedModule : module
-        );
-        setModules(updatedModules as Module[]);
-        console.log(updatedModules);
-        localStorage.setItem('simulationModules', JSON.stringify(updatedModules));
+        ); 
+        if (updatedModule.moduleType.toUpperCase() == selectedCategory.toUpperCase()) {
+            setModules(updatedModules as Module[]);
+            localStorage.setItem('simulationModules', JSON.stringify(updatedModules));
+        }
     };
 
     const webServiceModules = modules.filter((m): m is WebServiceEntity => m.moduleType === TypeModule.WEBSERVICE);
@@ -138,7 +159,7 @@ export default function Simulation() {
 
     return (
         <main className={styles.main}>
-            <Header onCategorySelect={handleCategorySelect} categorySelected={selectedCategory} />
+            <Header onCategorySelect={handleCategorySelect} categorySelected={selectedCategory} downloadProjectAsJson={downloadProjectAsJson} calculatePrice={calculatePrice} />
             <h1>Tester le prix de votre projet :</h1>
             <h4>Le prix est spécifique à votre projet, la simulation n&apos;est qu&apos;une estimation veuillez nous contacter pour plus d&apos;informations.</h4>
             <div className={styles.contentWrapper}>
@@ -159,6 +180,14 @@ export default function Simulation() {
                                     onUpdateModule={updateModule}
                                 />
                             )}
+                            {category === 'database' &&
+                                <DatabaseService
+                                    modules={databaseModules}
+                                    onAddModule={() => addModule(TypeModule.DATABASE)}
+                                    onDeleteModule={deleteModule}
+                                    onUpdateModule={updateModule}
+                                />
+                            }
                             {category === 'script' && (
                                 <ScriptService
                                     modules={scriptModules}
@@ -175,15 +204,6 @@ export default function Simulation() {
                                     onUpdateModule={updateModule}
                                 />
                             }
-                            {category === 'database' &&
-
-                                <DatabaseService
-                                    modules={databaseModules}
-                                    onAddModule={() => addModule(TypeModule.DATABASE)}
-                                    onDeleteModule={deleteModule}
-                                    onUpdateModule={updateModule}
-                                />
-                            }
                         </div>
                     ))}
                 </div>
@@ -191,4 +211,3 @@ export default function Simulation() {
         </main>
     );
 }
-

@@ -32,7 +32,7 @@
 }
 
 .header h1 {
-    margin: 0;
+    margin: auto;
     display: flex;
     align-items: center;
 }
@@ -54,6 +54,8 @@
     display: flex;
     align-items: center;
     cursor: pointer;
+    align-self: center;
+    margin: auto;
 }
 
 .separator {
