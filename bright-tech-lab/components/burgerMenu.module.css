@@ -7,15 +7,12 @@
     z-index: 100;
 }
 
-.burgerMenu {
-}
 .burgerMenuContainer {
     border: none;
     background-color: transparent;
     position: absolute;
     top: 20px;
     right: 40px;
-    border: 1px solid white;
 }
 
 .burgerMenuContainer:hover {
@@ -52,10 +49,18 @@
     border: none;
     background-color: transparent;
     justify-content: flex-end;
-    
+    margin-top: 10px;
 }
 
 .closeButtonIcon {
     color: white;
     font-size: 2rem;
+}
+
+.closeButton:hover {
+    cursor: pointer;
+}
+
+.closeButton:hover .closeButtonIcon {
+    color: var(--purple-light);
 }
