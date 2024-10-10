@@ -23,11 +23,11 @@ export default function BurgerMenu({ SimulationPriceClick }: { SimulationPriceCl
                         <button className={styles.closeButton} onClick={() => setIsOpen(false)}>
                             <FaXmark className={styles.closeButtonIcon} />
                         </button>
-                        <Link href="https://cv.maximetechlab.fr/" className={styles.noUderline}>
-                            <button onClick={SimulationPriceClick} className={styles.menuButton}>Simulation prix</button>
-                        </Link>
+                        <button onClick={SimulationPriceClick} className={styles.menuButton}>Simulation prix</button>
 
-                        <button onClick={() => setIsOpen(true)} className={styles.menuButton}>Portfolio</button>
+                        <Link href="https://cv.maximetechlab.fr/" className={styles.noUderline}>
+                            <button onClick={() => setIsOpen(false)} className={styles.menuButton}>Portfolio</button>
+                        </Link>
 
                     </div>
                 )

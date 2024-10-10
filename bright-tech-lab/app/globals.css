@@ -28,7 +28,6 @@
 
 html,
 body {
-  height: 100%;
   margin: 0;
   padding: 0;
   margin: 0;
@@ -41,5 +40,6 @@ body {
 
 body {
   min-height: 100vh;
+  overflow-x: hidden;
   overflow-y: auto; 
 }
