@@ -7,7 +7,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: GodricBeaumarchais/lol-ps-challenge
+  IMAGE_NAME: GodricBeaumarchais/techlab
 
 jobs:
   build:
