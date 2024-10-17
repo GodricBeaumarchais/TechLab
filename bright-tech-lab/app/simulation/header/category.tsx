@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './Category.module.css';
+import styles from './category.module.css';
 
 interface CategoryProps {
     text: string;

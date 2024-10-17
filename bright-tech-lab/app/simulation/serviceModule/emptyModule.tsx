@@ -1,5 +1,5 @@
 import styles from "./emptyModule.module.css";
-import voctorplus from "../../../asset/Vectorplus.svg";
+import vectorplus from "../../../asset/vectorplus.svg";
 import Image from 'next/image';
 
 interface EmptyModuleProps {
@@ -11,7 +11,7 @@ export default function EmptyModule({ handleClick }: EmptyModuleProps) {
         <div className={styles.borderbox}>
             <div className={styles.fillbox} onClick={handleClick}>
                 <Image
-                    src={voctorplus}
+                    src={vectorplus}
                     alt="voctorplus"
                     className={styles.image}
                 />
