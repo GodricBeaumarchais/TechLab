@@ -11,12 +11,14 @@ export default function ServiceCategoryModule({
     module,
     onDeleteModule,
     onBoolChange,
-    onEnumChange
+    onEnumChange,
+    isSelected
 }: {
     module: ServiceModule;
     onDeleteModule: (id: string) => void;
     onBoolChange: (moduleId: string, property: keyof ServiceModule, value: boolean) => void;
     onEnumChange: (moduleId: string, value: ServiceTypeModule) => void;
+    isSelected: boolean;
 }) {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -31,7 +33,7 @@ export default function ServiceCategoryModule({
                 <div className={styles.header}>
                     <div
                         className={styles.headerContent}
-                        onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                        onClick={() => { if(isSelected) setIsDropdownOpen(!isDropdownOpen) }}
                     >
                         <h1>{module.serviceType || "Sélectionner le type de service"}</h1>
                         <Image src={downArrow} alt="downArrow" className={styles.downArrow} />
@@ -52,10 +54,17 @@ export default function ServiceCategoryModule({
                     </div>
                 )}
                 <div className={styles.separator} />
-                <div className={styles.price}>
-                    Prix estimé : {estimatePrice(module) } €
-                </div>
+                {
+                    module.serviceType !== null && (
+                        <>
+                            <div className={styles.price}>
+                                Prix estimé : {estimatePrice(module)} €
+                            </div>
+                        </>
+                    )
+                }
             </div>
+
         </div>
     );
 }

@@ -9,9 +9,10 @@ interface ServiceProps {
     onAddModule: () => void;
     onDeleteModule: (id: string) => void;
     onUpdateModule: (updatedModule: ServiceModule) => void;
+    isSelected: boolean;
 }
 
-export default function Service({ modules, onAddModule, onDeleteModule, onUpdateModule }: ServiceProps) {
+export default function Service({ modules, onAddModule, onDeleteModule, onUpdateModule, isSelected }: ServiceProps) {
     const handleBoolChange = (moduleId: string, property: keyof ServiceModule, value: boolean) => {
         const moduleToUpdate = modules.find(m => m.id === moduleId);
         if (moduleToUpdate) {
@@ -43,6 +44,7 @@ export default function Service({ modules, onAddModule, onDeleteModule, onUpdate
                     onDeleteModule={onDeleteModule}
                     onBoolChange={handleBoolChange}
                     onEnumChange={handleEnumChange}
+                    isSelected={isSelected}
                 />
             ))}
             <EmptyModule handleClick={onAddModule} />

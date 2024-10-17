@@ -10,7 +10,7 @@
     right: 0;
     top: 0;
     color: white;
-    animation: headerAnimation 2s forwards;
+    animation: headerAnimation 4s forwards;
 }
 
 .logo {
@@ -42,13 +42,19 @@
 
 .rightPart {
     display: flex;
-    align-items: center; /* Centrage vertical des éléments enfants */
+    align-items: center;
     flex-direction: row;
     gap: 20px;
     height: 100%;
     margin-right: 20px;
-    
+    opacity: 0; /* Commencer avec une opacité de 0 */
+    transition: opacity 0.5s ease-in; /* Ajouter une transition pour l'opacité */
 }
+
+.rightPartVisible {
+    opacity: 1;
+}
+
 
 .iconContainer {
     display: flex; /* Ajout de display: flex */
@@ -76,7 +82,7 @@
         transform: translateX(5%);
         
     }
-    20% {
+    60% {
         height: 100vh;
         transform: translateX(5%);
         
@@ -92,3 +98,28 @@
     cursor: pointer;
 }
 
+
+
+@media (max-width: 1000px) {
+    .rightPart {
+        justify-content: center;
+        margin-right: 0px;
+        margin-left: 0px;
+        
+
+        
+    }
+
+    .titleDiv {
+        justify-content: center;
+        width: fit-content;
+        max-width: 90vw;
+        animation: none;
+        padding: 0;
+    }
+
+    .PriceDiv {
+        font-size: 22px;
+    }
+
+}

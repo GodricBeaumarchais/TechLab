@@ -111,3 +111,25 @@
     font-size: 22px;
     font-family: "Inconsolata", monospace;
 }
+
+
+@media (max-width: 1000px) {
+    .moins{
+        width: 20px;
+        height: 20px;
+    }
+
+    .downArrow{
+        width: 20px;
+        height: 20px;
+    }
+
+    .headerContent{
+        font-size: 8px;
+    }
+
+    .price {
+        font-size: 18px;
+    }
+
+}

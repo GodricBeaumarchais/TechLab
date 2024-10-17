@@ -9,9 +9,10 @@ interface ScriptServiceProps {
     onAddModule: () => void;
     onDeleteModule: (id: string) => void;
     onUpdateModule: (updatedModule: ScriptModule) => void;
+    isSelected: boolean;
 }
 
-export default function ScriptService({ modules, onAddModule, onDeleteModule, onUpdateModule }: ScriptServiceProps) {
+export default function ScriptService({ modules, onAddModule, onDeleteModule, onUpdateModule, isSelected }: ScriptServiceProps) {
     const handleBoolChange = (moduleId: string, property: keyof ScriptModule, value: boolean) => {
         const moduleToUpdate = modules.find(m => m.id === moduleId);
         if (moduleToUpdate) {
@@ -31,6 +32,7 @@ export default function ScriptService({ modules, onAddModule, onDeleteModule, on
                     module={module} 
                     onDeleteModule={onDeleteModule}
                     onBoolChange={handleBoolChange}
+                    isSelected={isSelected}
                 />
             ))}
             <EmptyModule handleClick={onAddModule} />

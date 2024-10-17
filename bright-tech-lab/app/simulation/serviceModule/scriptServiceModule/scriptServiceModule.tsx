@@ -11,11 +11,13 @@ import { estimatePrice } from "@/app/core/entity/estimatePrice";
 export default function ScriptServiceModule({
     module,
     onDeleteModule,
-    onBoolChange
+    onBoolChange,
+    isSelected
 }: {
     module: ScriptModule;
     onDeleteModule: (id: string) => void;
     onBoolChange: (moduleId: string, property: keyof ScriptModule, value: boolean) => void;
+    isSelected: boolean;
 }) {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -30,14 +32,14 @@ export default function ScriptServiceModule({
                 <div className={styles.header}>
                     <div
                         className={styles.headerContent}
-                        onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                        onClick={() => { if(isSelected) setIsDropdownOpen(!isDropdownOpen) }}
                     >
                         <h1>{module.scriptType || "Sélectionner le type de script"}</h1>
                         <Image src={downArrow} alt="downArrow" className={styles.downArrow} />
                     </div>
                     <Image src={moins} alt="moins" className={styles.moins} onClick={() => onDeleteModule(module.id)} />
                 </div>
-                {isDropdownOpen && (
+                {isDropdownOpen  && (
                     <div className={styles.dropdown}>
                         {Object.values(ScriptTypeModule).map((type) => (
                             <div
@@ -51,14 +53,22 @@ export default function ScriptServiceModule({
                     </div>
                 )}
                 <div className={styles.separator} />
+
+                {
+                    module.scriptType !== null && (
+                        <>
                 <div className={styles.content}>
                     <BoolSelector bool={module.interfaceGraphique} setBool={(value) => onBoolChange(module.id, 'interfaceGraphique', value)} label="Interface graphique" />
                     <BoolSelector bool={module.gestionDistance} setBool={(value) => onBoolChange(module.id, 'gestionDistance', value)} label="Gestion à distance" />
                     <BoolSelector bool={module.intelligenceArtificielle} setBool={(value) => onBoolChange(module.id, 'intelligenceArtificielle', value)} label="Intelligence artificielle" />
                 </div>
+                <div className={styles.separator}></div>
                 <div className={styles.price}>
                     Prix estimé : {estimatePrice(module) } €
-                </div>
+                            </div>
+                        </>
+                    )
+                }
             </div>
         </div>
     );

@@ -22,14 +22,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <header>
-        <svg width="1em" height="1em">
-          <linearGradient id="blue-gradient" x1="100%" y1="100%" x2="0%" y2="0%">
-            <stop stopColor="#01ECF3" offset="0%" />
-            <stop stopColor="#DA107B" offset="100%" />
-          </linearGradient>
-        </svg>
-      </header>
+      <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+        
 
       <body className={`${inter.className} ${inconsolata.className}`}>{children}</body>
       

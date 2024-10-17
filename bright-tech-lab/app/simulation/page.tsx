@@ -8,6 +8,10 @@ import ScriptService from './category/scriptService';
 import Service from './category/service';
 import DatabaseService from './category/databaseService';
 import { calculerPrixTotal } from '../core/entity/estimatePrice';
+import { useSwipeable } from 'react-swipeable';
+import Head from 'next/head';
+import InfoScreen from './info/infoScreen';
+
 const categories = Object.values(TypeModule).map(type => (
     type.toLowerCase()
 ));
@@ -16,6 +20,7 @@ export default function Simulation() {
     const [selectedCategory, setSelectedCategory] = useState('webservice');
     const [modules, setModules] = useState<Module[]>([]);
 
+    const [isContentVisible, setIsContentVisible] = useState(false);
     useEffect(() => {
         const savedModules = localStorage.getItem('simulationModules');
         if (savedModules) {
@@ -58,7 +63,49 @@ export default function Simulation() {
             });
             setModules(reconstructedModules);
         }
+        
     }, []);
+
+
+    useEffect(() => {
+        setTimeout(() => {
+            setIsContentVisible(true);
+        }, 4000); 
+
+    }, []);
+
+    const handlers = useSwipeable({
+        onSwipedLeft: () => {
+            console.log("onSwipedLeft")
+            const currentIndex = categories.indexOf(selectedCategory);
+            if (currentIndex < categories.length - 1) {
+                setSelectedCategory(categories[currentIndex + 1]);
+            }
+        },
+        onSwipedRight: () => {
+            const currentIndex = categories.indexOf(selectedCategory);
+            if (currentIndex > 0) {
+                setSelectedCategory(categories[currentIndex - 1]);
+            }
+        },
+        trackMouse: true
+    });
+
+    const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1000);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setWindowWidth(window.innerWidth);
+        };
+
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+        
+    }, []);
+
 
     const calculatePrice = () => {
         return calculerPrixTotal(modules);
@@ -66,7 +113,8 @@ export default function Simulation() {
 
     const deleteModule = (moduleId: string) => {
         const updatedModules = modules.filter(module => module.id !== moduleId);
-        if (updatedModules[0].moduleType.toUpperCase() == selectedCategory.toUpperCase()) {
+        const currentModuleCategory = modules.filter(module => module.id == moduleId)[0].moduleType.toUpperCase()
+        if (currentModuleCategory == selectedCategory.toUpperCase()) {
             setModules(updatedModules as Module[]);
             localStorage.setItem('simulationModules', JSON.stringify(updatedModules));
         }
@@ -78,9 +126,11 @@ export default function Simulation() {
 
     const calculateTranslation = () => {
         const index = categories.indexOf(selectedCategory);
-        console.log(index)
-        const centerOffset = 28.5 - (index * 25) - 12.5;
-        return `${centerOffset}%`;
+        if (windowWidth < 1000) {
+            return `${2 - (index * 45)}%`;
+        } else {
+            return `${12.5 - (index * 25)}%`;
+        }
     };
 
     const addModule = (type: TypeModule) => {
@@ -124,7 +174,7 @@ export default function Simulation() {
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
     };
-    
+
     const createModuleInDifferentService = (type: TypeModule, targetService: string) => {
         const newModule = {
             id: `${type}_${Date.now()}`,
@@ -142,7 +192,7 @@ export default function Simulation() {
     const updateModule = (updatedModule: Module) => {
         const updatedModules = modules.map(module =>
             module.id === updatedModule.id ? updatedModule : module
-        ); 
+        );
         if (updatedModule.moduleType.toUpperCase() == selectedCategory.toUpperCase()) {
             setModules(updatedModules as Module[]);
             localStorage.setItem('simulationModules', JSON.stringify(updatedModules));
@@ -157,12 +207,32 @@ export default function Simulation() {
 
     const databaseModules = modules.filter((m): m is DatabaseModule => m.moduleType === TypeModule.DATABASE);
 
+    const isSelected = (moduleType: TypeModule) => {
+        return moduleType.toUpperCase() == selectedCategory.toUpperCase();
+    };
+
+    const [showInfoScreen, setShowInfoScreen] = useState(true);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setShowInfoScreen(false);
+        }, 2500);
+
+        return () => clearTimeout(timer);
+    }, []);
+
     return (
         <main className={styles.main}>
+            <svg width="1em" height="1em">
+                    <linearGradient id="blue-gradient" x1="100%" y1="100%" x2="0%" y2="0%">
+                        <stop stopColor="#01ECF3" offset="0%" />
+                        <stop stopColor="#DA107B" offset="100%" />
+                    </linearGradient>
+                </svg>
+            {showInfoScreen && <InfoScreen />}
             <Header onCategorySelect={handleCategorySelect} categorySelected={selectedCategory} downloadProjectAsJson={downloadProjectAsJson} calculatePrice={calculatePrice} />
-            <h1>Tester le prix de votre projet :</h1>
-            <h4>Le prix est spécifique à votre projet, la simulation n&apos;est qu&apos;une estimation veuillez nous contacter pour plus d&apos;informations.</h4>
-            <div className={styles.contentWrapper}>
+            
+            <div {...handlers}  className={`${styles.contentWrapper} ${isContentVisible ? styles.contentVisible : ''}`}>
                 <div className={styles.contentSlider} style={{
                     transform: `translateX(${calculateTranslation()})`
                 }}>
@@ -178,6 +248,7 @@ export default function Simulation() {
                                     onAddModule={() => addModule(TypeModule.WEBSERVICE)}
                                     onDeleteModule={deleteModule}
                                     onUpdateModule={updateModule}
+                                    isSelected={isSelected(TypeModule.WEBSERVICE)}
                                 />
                             )}
                             {category === 'database' &&
@@ -186,6 +257,7 @@ export default function Simulation() {
                                     onAddModule={() => addModule(TypeModule.DATABASE)}
                                     onDeleteModule={deleteModule}
                                     onUpdateModule={updateModule}
+                                    isSelected={isSelected(TypeModule.DATABASE)}
                                 />
                             }
                             {category === 'script' && (
@@ -194,6 +266,7 @@ export default function Simulation() {
                                     onAddModule={() => addModule(TypeModule.SCRIPT)}
                                     onDeleteModule={deleteModule}
                                     onUpdateModule={updateModule}
+                                    isSelected={isSelected(TypeModule.SCRIPT)}
                                 />
                             )}
                             {category === 'service' &&
@@ -202,12 +275,23 @@ export default function Simulation() {
                                     onAddModule={() => addModule(TypeModule.SERVICE)}
                                     onDeleteModule={deleteModule}
                                     onUpdateModule={updateModule}
+                                    isSelected={isSelected(TypeModule.SERVICE)}
                                 />
                             }
                         </div>
                     ))}
                 </div>
             </div>
+            {  (windowWidth < 1000) && 
+                <div className={styles.tabIndicator}>
+                    {categories.map((category) => (
+                        <div key={category} className={`${styles.tab} ${selectedCategory === category ? styles.active : ''}`} />
+
+
+                        
+                    ))}
+                </div>
+            }
         </main>
     );
 }

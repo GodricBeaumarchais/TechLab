@@ -9,9 +9,10 @@ interface DatabaseServiceProps {
     onAddModule: () => void;
     onDeleteModule: (id: string) => void;
     onUpdateModule: (updatedModule: DatabaseModule) => void;
+    isSelected: boolean;
 }
 
-export default function DatabaseService({ modules, onAddModule, onDeleteModule, onUpdateModule }: DatabaseServiceProps) {
+export default function DatabaseService({ modules, onAddModule, onDeleteModule, onUpdateModule, isSelected }: DatabaseServiceProps) {
     const handleBoolChange = (moduleId: string, property: keyof DatabaseModule, value: boolean) => {
         const moduleToUpdate = modules.find(m => m.id === moduleId);
         if (moduleToUpdate) {
@@ -32,6 +33,7 @@ export default function DatabaseService({ modules, onAddModule, onDeleteModule, 
                     module={module} 
                     onDeleteModule={onDeleteModule}
                     onBoolChange={handleBoolChange}
+                    isSelected={isSelected}
                 />
             ))}
             <EmptyModule handleClick={onAddModule} />

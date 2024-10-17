@@ -34,7 +34,7 @@ export default function Header({ onCategorySelect, categorySelected, downloadPro
 
         setTimeout(() => {
             setAreCategoriesVisible(true);
-        }, 1500);
+        }, 3500);
 
         return () => {
             if (titleDiv) {
@@ -55,43 +55,72 @@ export default function Header({ onCategorySelect, categorySelected, downloadPro
         onCategorySelect(categoryId);
     };
 
-    return (
-        
-        <div className={styles.titleDiv}>
-            
-            <Image
-                priority
-                src={completeLogo}
-                alt="logo"
-                className={`${styles.logo} ${isAnimationFinished ? styles.logoPointer : ''}`}
-                onClick={() => router.push("/")}
-            />
+    const [windowWidth, setWindowWidth] = useState(2000);
 
-            
-            <div className={`${styles.categoriesContainer} ${areCategoriesVisible ? styles.categoriesVisible : ''}`}>
-                {categories.map((category) => (
-                    <Category
-                        key={category.id}
-                        text={category.text}
-                        isSelected={categorySelected === category.id}
-                        onClick={() => handleCategoryClick(category.id)}
-                    />
-                ))}
+    useEffect(() => {
+        const handleResize = () => setWindowWidth(window.innerWidth);
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    if (windowWidth > 1000) {
+        return (
+            <div className={styles.titleDiv}>
+                
+
+                <Image
+                    priority
+                    src={completeLogo}
+                    alt="logo"
+                    className={`${styles.logo} ${isAnimationFinished ? styles.logoPointer : ''}`}
+                    onClick={() => { if (isAnimationFinished) router.push("/") }}
+                />
+
+
+                <div className={`${styles.categoriesContainer} ${areCategoriesVisible ? styles.categoriesVisible : ''}`}>
+                    {categories.map((category) => (
+                        <Category
+                            key={category.id}
+                            text={category.text}
+                            isSelected={categorySelected === category.id}
+                            onClick={() => handleCategoryClick(category.id)}
+                        />
+                    ))}
+                </div>
+                <div className={`${styles.rightPart} ${areCategoriesVisible ? styles.rightPartVisible : ''}`}>
+                    <div className={styles.iconContainer} onClick={downloadProjectAsJson}>
+                        <FaDownload style={{ fill: "url(#blue-gradient)" }} />
+                    </div>
+                    <div className={styles.iconContainer} onClick={handleMailClick}>
+                        <FaMailBulk style={{ fill: "url(#blue-gradient)" }} />
+                    </div>
+                    <div className={styles.PriceDiv} >
+                        <p>Prix {calculatePrice()} €</p>
+                    </div>
+
+
+                </div>
+                
             </div>
-            <div className={styles.rightPart}>
-                <div className={styles.iconContainer} onClick={downloadProjectAsJson}>
-                    <FaDownload style={{ fill: "url(#blue-gradient)" }} />
-                </div>
-                <div className={styles.iconContainer}  onClick={handleMailClick}>
-                    <FaMailBulk style={{ fill: "url(#blue-gradient)" }} />
-                </div>
-                <div className={styles.PriceDiv} >
-                    <p>Prix {calculatePrice()} €</p>
-                </div>
+        )
+    }
+    else {
+        return (
+            <div className={styles.titleDiv}>
+                <div className={`${styles.rightPart} ${areCategoriesVisible ? styles.rightPartVisible : ''}`}>
+                    <div className={styles.iconContainer} onClick={downloadProjectAsJson}>
+                        <FaDownload style={{ fill: "url(#blue-gradient)" }} />
+                    </div>
 
-
+                    <div className={styles.PriceDiv} >
+                        <p>Prix {calculatePrice()} €</p>
+                    </div>
+                    <div className={styles.iconContainer} onClick={handleMailClick}>
+                        <FaMailBulk style={{ fill: "url(#blue-gradient)" }} />
+                    </div>
+                </div>
+                
             </div>
-            
-        </div>
-    );
+        );
+    }
 }

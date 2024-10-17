@@ -55,3 +55,25 @@
     
 }
 
+
+@media (max-width: 1000px) {
+    
+    .container p{
+        font-size: 14px;
+    }
+
+    .borderbox{
+        width: 20px;
+        height: 20px;
+        border-radius: 4px;
+    }
+
+    .fillbox {
+        border-radius: 3px;
+    }
+
+    .fillboxActive {
+        border-radius: 3px;
+    }
+    
+}

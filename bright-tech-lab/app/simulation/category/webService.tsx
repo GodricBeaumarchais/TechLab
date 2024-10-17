@@ -10,9 +10,10 @@ interface WebServiceProps {
     onAddModule: () => void;
     onDeleteModule: (id: string) => void;
     onUpdateModule: (updatedModule: WebServiceEntity) => void; // Nouvelle prop
+    isSelected: boolean;    
 }
 
-export default function WebService({ modules, onAddModule, onDeleteModule, onUpdateModule }: WebServiceProps){
+export default function WebService({ modules, onAddModule, onDeleteModule, onUpdateModule, isSelected }: WebServiceProps){
 
     const handleBoolChange = (moduleId: string, property: keyof WebServiceEntity | keyof FrontendWebServiceModule, value: boolean) => {
         const moduleToUpdate = modules.find(m => m.id === moduleId);
@@ -44,6 +45,7 @@ export default function WebService({ modules, onAddModule, onDeleteModule, onUpd
                         onDeleteModule={onDeleteModule}
                         onBoolChange={handleBoolChange}
                         onEnumChange={handleEnumChange}
+                        isSelected={isSelected}
                     />
             ))}
             <EmptyModule handleClick={onAddModule} />

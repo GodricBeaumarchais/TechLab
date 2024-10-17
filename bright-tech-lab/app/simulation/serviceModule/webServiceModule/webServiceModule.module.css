@@ -110,4 +110,27 @@
     align-self: flex-end;
     font-size: 22px;
     font-family: "Inconsolata", monospace;
+    margin-top: 15px;
+}
+
+
+@media (max-width: 1000px) {
+    .moins{
+        width: 20px;
+        height: 20px;
+    }
+
+    .downArrow{
+        width: 20px;
+        height: 20px;
+    }
+
+    .headerContent{
+        font-size: 12px;
+    }
+
+    .price {
+        font-size: 18px;
+    }
+
 }

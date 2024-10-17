@@ -12,12 +12,14 @@ export default function WebServiceModule({
     module,
     onDeleteModule,
     onBoolChange,
-    onEnumChange
+    onEnumChange,
+    isSelected
 }: {
     module: WebServiceEntity;
     onDeleteModule: (id: string) => void;
     onBoolChange: (moduleId: string, property: keyof WebServiceEntity | keyof FrontendWebServiceModule, value: boolean) => void;
     onEnumChange: (moduleId: string, property: keyof BackendWebServiceModule, value: WebServiceTypeModule) => void;
+    isSelected: boolean;
 }) {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -67,7 +69,7 @@ export default function WebServiceModule({
                 <div className={styles.header}>
                     <div
                         className={styles.headerContent}
-                        onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                        onClick={() => { if(isSelected) setIsDropdownOpen(!isDropdownOpen) }}
                     >
                         <h1>{module.webServiceType || "Selectionner le type de service"}</h1>
                         <Image src={downArrow} alt="downArrow" className={styles.downArrow} />
@@ -88,20 +90,27 @@ export default function WebServiceModule({
                     </div>
                 )}
                 <div className={styles.separator} />
-                <div className={styles.content}>
-                    {renderContent()}
-                </div>
-                <div className={styles.separator} />
-                <div className={styles.seccontent}>
-                    <BoolSelector bool={module.Design} setBool={(value) => onBoolChange(module.id, 'Design', value)} label="Design" />
-                    <BoolSelector bool={module.Create} setBool={(value) => onBoolChange(module.id, 'Create', value)} label="Create" />
-                    <BoolSelector bool={module.Update} setBool={(value) => onBoolChange(module.id, 'Update', value)} label="Update" />
-                    <BoolSelector bool={module.Deploy} setBool={(value) => onBoolChange(module.id, 'Deploy', value)} label="Deploy" />
-                    {/* <BoolSelector bool={module.hosting} setBool={(value) => onBoolChange(module.id, 'hosting', value)} label="hosting" /> */}
-                </div>
-                <div className={styles.price}>
-                    Prix estimé : {estimatePrice(module) } €  
-                </div>
+                {
+                    module.webServiceType !== null && (
+                        <>
+                            <div className={styles.content}>
+                                {renderContent()}
+                            </div>
+                            <div className={styles.separator} />
+                            <div className={styles.seccontent}>
+                                <BoolSelector bool={module.Design} setBool={(value) => onBoolChange(module.id, 'Design', value)} label="Design" />
+                                <BoolSelector bool={module.Create} setBool={(value) => onBoolChange(module.id, 'Create', value)} label="Create" />
+                                <BoolSelector bool={module.Update} setBool={(value) => onBoolChange(module.id, 'Update', value)} label="Update" />
+                                <BoolSelector bool={module.Deploy} setBool={(value) => onBoolChange(module.id, 'Deploy', value)} label="Deploy" />
+                                {/* <BoolSelector bool={module.hosting} setBool={(value) => onBoolChange(module.id, 'hosting', value)} label="hosting" /> */}
+                            </div>
+                            <div className={styles.separator}></div>
+                            <div className={styles.price}>
+                                Prix estimé : {estimatePrice(module)} €
+                            </div>
+                        </>
+                    )
+                }
             </div>
         </div>
     );

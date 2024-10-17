@@ -13,6 +13,7 @@
     position: absolute;
     top: 20px;
     right: 40px;
+    z-index: 100;
 }
 
 .burgerMenuContainer:hover {
@@ -26,6 +27,9 @@
     position: absolute;
     right: 0;
     background-color: var(--blue-med-dark);
+    z-index: 101;
+    animation-duration: 0.3s;
+    animation-fill-mode: forwards;
 } 
 
 .menuButton {
@@ -63,4 +67,32 @@
 
 .closeButton:hover .closeButtonIcon {
     color: var(--purple-light);
+}
+
+.menuContainerOpen {
+    right: 0; /* Glisse vers la gauche */
+    animation-name: slideIn;
+}
+
+.menuContainerClose {
+    right: -100%; /* Glisse vers la droite */
+    animation-name: slideOut;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideOut {
+    from {
+        transform: translateX(0%);
+    }
+    to {
+        transform: translateX(100%);
+    }
 }

@@ -43,6 +43,8 @@
 }
 
 
+
+
 .subtitleDiv{
   position: absolute;
   font-size: 1.4vw;
@@ -128,7 +130,6 @@
   border-radius: 50%;
   z-index: -1;
   /* Place le pseudo-élément derrière le conteneur */
-
 }
 
 .presentationTitle {
