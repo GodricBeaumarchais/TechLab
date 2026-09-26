@@ -27,7 +27,7 @@ export default function ContactForm({ defaultOffer = "" }) {
 
     setStatus("sending");
     try {
-      await emailjs.send(process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID, "template_05zy9yu", { name: data.name, email: data.email, message }, { publicKey: "5lKPKuq7M-RF4mAqX" });
+      await emailjs.send(process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID, "template_cy7mkkr", { name: data.name, email: data.email, message }, { publicKey: "gDp0RZEDy5rQGfDEq" });
       setStatus("sent");
     } catch {
       setStatus("error");
