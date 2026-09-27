@@ -3,6 +3,7 @@ import { FaGlobe, FaDiscord, FaLinux, FaArrowRight } from "react-icons/fa";
 import { TbApi } from "react-icons/tb";
 import { SiKubernetes } from "react-icons/si";
 import { formatPrice } from "../data/services";
+import PromoPrice from "./PromoPrice";
 
 // Défini dans .env.development / .env.production
 const PORTFOLIO_URL = process.env.NEXT_PUBLIC_PORTFOLIO_URL;
@@ -42,7 +43,7 @@ export function OfferCard({ offer, index = 0 }) {
       <Icon className="offer-card-icon" aria-hidden="true" />
       <h3>{offer.title}</h3>
       <p>{offer.tagline}</p>
-      <div className="price">{formatPrice(offer.price)}</div>
+      <div className="price"><PromoPrice price={offer.price} /></div>
       <div className="offer-card-foot">
         <span>{offer.delay}</span>
         <span className="offer-card-more">Détails <FaArrowRight aria-hidden="true" size={12} /></span>

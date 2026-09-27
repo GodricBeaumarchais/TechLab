@@ -1,4 +1,5 @@
 import "./globals.css";
+import PromoBanner from "./PromoBanner";
 
 export const metadata = {
   title: "BrightLab Services",
@@ -16,7 +17,10 @@ export default function RootLayout({ children }) {
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@300;400;500&display=swap" rel="stylesheet" />
       </head>
-      <body>{children}</body>
+      <body>
+        <PromoBanner />
+        {children}
+      </body>
     </html>
   );
 }

@@ -1,4 +1,5 @@
 import { categories, offers } from "../data/services";
+import { promo } from "../data/promo";
 import Link from "next/link";
 import { Header, Footer, OfferCard, categoryIcons } from "./ui";
 import Background from "./background";
@@ -16,6 +17,9 @@ export default function Home() {
           Ingénieur en développement web, logiciel et système. Je conçois, développe et héberge
           vos projets, de la première page jusqu'à l'infrastructure qui les fait tourner.
         </p>
+        {promo.enabled && (
+          <p style={{ color: "var(--main-blue)", fontSize: "0.9em" }}>{promo.hosting}</p>
+        )}
         <nav className="category-nav" aria-label="Catégories de services">
           {categories.map((c) => {
             const Icon = categoryIcons[c.id];

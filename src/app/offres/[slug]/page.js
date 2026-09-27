@@ -4,6 +4,7 @@ import { FaCheck } from "react-icons/fa";
 import { categories, offers, formatPrice } from "../../../data/services";
 import { Header, Footer, OfferCard, categoryIcons } from "../../ui";
 import Background from "../../background";
+import PromoPrice from "../../PromoPrice";
 
 export function generateStaticParams() {
   return offers.map((o) => ({ slug: o.slug }));
@@ -58,7 +59,7 @@ export default async function OfferPage({ params }) {
 
           <aside className="glass panel aside">
             <div className="price-note">Fourchette indicative</div>
-            <div className="price">{formatPrice(offer.price)}</div>
+            <div className="price"><PromoPrice price={offer.price} /></div>
             <dl className="facts">
               <div><dt>Délai</dt><dd>{offer.delay}</dd></div>
               <div>
